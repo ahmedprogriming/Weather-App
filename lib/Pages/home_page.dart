@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:weather_app/Pages/SerachPage.dart';
+import 'package:weather_app/Providers/weather_Provider.dart';
 import 'package:weather_app/models/wether_model.dart';
 
 class HomePage extends StatefulWidget {
@@ -21,8 +23,11 @@ class _HomePageState extends State<HomePage> {
   
  });
 }
+
+WeatherModel? WeatherData;
   @override
   Widget build(BuildContext context) {
+    WeatherData= Provider.of<WeatherProdviders>(context).Weatherget;
     return  Scaffold(
       
       appBar: AppBar(
@@ -39,7 +44,7 @@ class _HomePageState extends State<HomePage> {
         title: Text("Weather App",style:TextStyle(color: Colors.white) ,),
         backgroundColor: Color(0xff1F9AFF),
       ),
- body:weatherData == null? Center(
+ body:WeatherData == null? Center(
        
         child: Column(
           

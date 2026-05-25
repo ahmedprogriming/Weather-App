@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:weather_app/Providers/weather_Provider.dart';
 import 'package:weather_app/models/wether_model.dart';
 import 'package:weather_app/services/weather_service.dart';
 
@@ -28,9 +30,9 @@ String? Cityname;
         WeatherService service= WeatherService();
 WeatherModel weather=   await service.getWeather(nameCity: Cityname!);
     
-
-       weatherData=weather;
-       uiUpdate!();
+      Provider.of<WeatherProdviders>(context,listen: false).Weatherset=weather;
+       Provider.of<WeatherProdviders>(context,listen: false).Cityname=Cityname;
+       
        Navigator.pop(context);
       },
       decoration: InputDecoration(
@@ -48,4 +50,3 @@ WeatherModel weather=   await service.getWeather(nameCity: Cityname!);
 }
 
 
-WeatherModel? weatherData;
