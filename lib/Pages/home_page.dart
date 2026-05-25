@@ -1,11 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/Pages/SerachPage.dart';
+import 'package:weather_app/models/wether_model.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({
+class HomePage extends StatefulWidget {
+   HomePage({
     Key? key,
   }) : super(key: key);
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+
+class _HomePageState extends State<HomePage> {
+
+  void uiUpdate()
+{
+ setState(()
+ {
+  
+ });
+}
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -16,7 +31,7 @@ class HomePage extends StatelessWidget {
           {
          Navigator.push(context,MaterialPageRoute(builder:(context)
          {
-          return SearchPage();
+          return SearchPage(uiUpdate:uiUpdate , );
          }));
           }, 
           icon: Icon(Icons.search),color: Colors.white,)
@@ -24,7 +39,7 @@ class HomePage extends StatelessWidget {
         title: Text("Weather App",style:TextStyle(color: Colors.white) ,),
         backgroundColor: Color(0xff1F9AFF),
       ),
- body: Center(
+ body:weatherData == null? Center(
        
         child: Column(
           
@@ -47,7 +62,69 @@ class HomePage extends StatelessWidget {
             )
           ],
         ),
-      ),
+      ): Container(
+        color: Colors.orange,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+           const   Spacer(flex: 3,),
+            Text(
+              "Cairo",
+              style: TextStyle(fontSize: 32,
+              fontWeight:FontWeight.bold,)
+              ),
+                Text(
+              "Update: 20/2/2026",
+              style: TextStyle(fontSize: 18,
+              )
+              ),
+              Spacer(flex: 1,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Image.asset('assets/images/clear.png'),
+                    Text(
+              "30",
+              style: TextStyle(fontSize: 32,
+              fontWeight: FontWeight.bold,
+              )
+              ),
+              
+              Column(
+                children: [
+                   Text(
+              "MinTemp:30",
+              style: TextStyle(fontSize: 14,
+            
+              )
+              ),
+              Text(
+              "MaxTemp:25",
+              style: TextStyle(fontSize: 14,
+            
+              )
+              ),
+                ],
+              )
+                ],
+              ),
+               Spacer(flex: 1,),
+              Column(children: [
+           Text(
+              "Clear",
+              style: TextStyle(fontSize: 34,
+              fontWeight:FontWeight.bold,)
+              ),
+              ],),
+               Spacer(flex: 5,),
+          ],
+
+          
+        ),
+        
+
+
+      )
     );
      
      
