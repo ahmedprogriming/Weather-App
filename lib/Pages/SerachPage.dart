@@ -23,12 +23,16 @@ String? Cityname;
    child: Padding(
      padding: const EdgeInsets.symmetric(horizontal: 16),
      child: TextField(
+      onChanged: (data) 
+      {
+        Cityname=data;
+      },
       onSubmitted: (data) async
       {
         Cityname=data;
 
         WeatherService service= WeatherService();
-WeatherModel weather=   await service.getWeather(nameCity: Cityname!);
+WeatherModel? weather=   await service.getWeather(nameCity: Cityname!);
     
       Provider.of<WeatherProdviders>(context,listen: false).Weatherset=weather;
        Provider.of<WeatherProdviders>(context,listen: false).Cityname=Cityname;
@@ -38,7 +42,18 @@ WeatherModel weather=   await service.getWeather(nameCity: Cityname!);
       decoration: InputDecoration(
         hintText: "Enter name a city",
         border: OutlineInputBorder(),
-        suffix: Icon(Icons.search),
+        suffix: GestureDetector(child: Icon(Icons.search)
+        ,onTap:()async
+        {  
+          WeatherService service= WeatherService();
+WeatherModel? weather=   await service.getWeather(nameCity: Cityname!);
+    
+      Provider.of<WeatherProdviders>(context,listen: false).Weatherset=weather;
+       Provider.of<WeatherProdviders>(context,listen: false).Cityname=Cityname;
+       
+       Navigator.pop(context);
+
+        } ,),
         label: Text('Search'),
         contentPadding: EdgeInsets.symmetric(vertical: 32,horizontal: 24)
       ),

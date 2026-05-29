@@ -68,18 +68,27 @@ WeatherModel? WeatherData;
           ],
         ),
       ): Container(
-        color: Colors.orange,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(colors: [
+            WeatherData!.getColors(),
+               WeatherData!.getColors()[300]!,
+                WeatherData!.getColors()[100]!,
+          ],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter
+          )
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
            const   Spacer(flex: 3,),
             Text(
-              "Cairo",
+              Provider.of<WeatherProdviders>(context).Cityname!,
               style: TextStyle(fontSize: 32,
               fontWeight:FontWeight.bold,)
               ),
                 Text(
-              "Update: 20/2/2026",
+              "Update at: ${WeatherData!.date.hour}:${WeatherData!.date.minute}",
               style: TextStyle(fontSize: 18,
               )
               ),
@@ -87,9 +96,9 @@ WeatherModel? WeatherData;
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Image.asset('assets/images/clear.png'),
+                  Image.asset(WeatherData!.getImage()),
                     Text(
-              "30",
+              "${WeatherData!.temp.toInt()}",
               style: TextStyle(fontSize: 32,
               fontWeight: FontWeight.bold,
               )
@@ -98,13 +107,13 @@ WeatherModel? WeatherData;
               Column(
                 children: [
                    Text(
-              "MinTemp:30",
+              "MinTemp:${WeatherData!.minTemp.toInt()}",
               style: TextStyle(fontSize: 14,
             
               )
               ),
               Text(
-              "MaxTemp:25",
+              "MaxTemp:${WeatherData!.maxTemp.toInt()}",
               style: TextStyle(fontSize: 14,
             
               )
@@ -116,7 +125,7 @@ WeatherModel? WeatherData;
                Spacer(flex: 1,),
               Column(children: [
            Text(
-              "Clear",
+              WeatherData?.WeatherStateName ??'not data',
               style: TextStyle(fontSize: 34,
               fontWeight:FontWeight.bold,)
               ),
